@@ -36,7 +36,7 @@
     
     
       
-        <title>Cómo crear teselas vectoriales - Teselas Vectoriales en la IDE</title>
+        <title>5. Iconos y tipografías - Teselas Vectoriales en la IDE</title>
       
     
     
@@ -90,7 +90,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#como-crear-teselas-vectoriales" tabindex="1" class="md-skip">
+      <a href="../#iconos-y-tipografias" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -116,7 +116,7 @@
                 Teselas Vectoriales en la IDE
               </span>
               <span class="md-header-nav__topic">
-                Cómo crear teselas vectoriales
+                5. Iconos y tipografías
               </span>
             
           
@@ -291,11 +291,20 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../05_sprites_glyphs/" title="5. Iconos y tipografías" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="5. Iconos y tipografías" class="md-nav__link md-nav__link--active">
       5. Iconos y tipografías
     </a>
+    
   </li>
 
     
@@ -352,43 +361,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#los-datos-de-natural-earth" title="Los datos de Natural Earth" class="md-nav__link">
-    Los datos de Natural Earth
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#tippecanoe" title="Tippecanoe" class="md-nav__link">
-    Tippecanoe
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#creando-el-fichero-mbtiles" title="Creando el fichero mbtiles" class="md-nav__link">
-    Creando el fichero mbtiles
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#publicando-el-mbtiles" title="Publicando el mbtiles" class="md-nav__link">
-    Publicando el mbtiles
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -399,143 +371,12 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/geomatico/taller-vt-jiide/edit/master/docs/4_tippecanoe.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/geomatico/taller-vt-jiide/edit/master/docs/05_sprites_glyphs.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="como-crear-teselas-vectoriales">Cómo crear teselas vectoriales</h1>
-<h2 id="los-datos-de-natural-earth">Los datos de Natural Earth</h2>
-<p>En el apartado de descargas de <a href="http://www.naturalearthdata.com/">Natural Earth</a> hay varios conjuntos de datos
-en formato Shapefile, según la escala. En el taller trabajaremos con un subconjunto de los datos de la escala 1:10M
-(1:10.000.000). Para ahorrarnos la transformación de Shapefile a GeoJSON, utilizaremos los datos procedentes de
-<a href="https://github.com/nvkelso/natural-earth-vector/tree/master/geojson">https://github.com/nvkelso/natural-earth-vector/</a>.</p>
-<p>En concreto usaremos las siguientes capas:</p>
-<ul>
-<li>Cultural<ul>
-<li>Admin 0 – Countries (247 países en el mundo. Groenlandia separada de Dinamarca)</li>
-<li>Populated Places (Puntos de ciudades y pueblos)</li>
-<li>Roads (Carreteras principales)</li>
-<li>Railroads (Vías de Trenes)</li>
-<li>Airports (Aeropuertos)</li>
-</ul>
-</li>
-<li>Physical<ul>
-<li>Coastline (Línea de costa que incluyen islas principales)</li>
-<li>Land (Polígonos terrestres que incluyen islas principales)</li>
-<li>Ocean (Oceano)</li>
-<li>Rivers + lake centerlines (Rios en única línea que incluyen líneas centrales de lagos)</li>
-<li>Lakes + Reservoirs (Lagos naturales y artificiales)</li>
-</ul>
-</li>
-</ul>
-<p>Nosotros descargaremos las 10 capas de un zip y las descomprimiremos en <code>taller-vt/datos/naturalearth</code>:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> ~/Desktop/taller-vt/datos
-wget https://geoinquiets.github.io/taller-vt/downloads/naturalearth.zip
-unzip naturalearth.zip 
-</pre></div>
-</td></tr></table>
-
-<h2 id="tippecanoe">Tippecanoe</h2>
-<p><a href="https://github.com/mapbox/tippecanoe">Tippecanoe</a> es la herramienta que permite crear teselas vectoriales de
-grandes colecciones de elementos en formato GeoJSON.</p>
-<p>El objetivo de Tippecanoe es permitir una visión de sus datos independiente de la escala, de modo que en cualquier
-nivel, desde el mundo entero hasta un solo edificio, se pueda apreciar la densidad y la textura de los datos, en
-lugar de una simplificación geométrica, que puede eliminar vértices importantes que cambien la apariencia de los datos
-en su versión simplificada.</p>
-<p>Algunos ejemplos:</p>
-<ul>
-<li>Teniendo todo el callejero de OpenStreetMap, la vista general devolverá algo que se parece a
-"Todas las calles" en lugar de algo que parece un atlas de carreteras interestatal.</li>
-<li>Teniendo todas las plantas de edificios de una ciudad, en la vista general donde los edificios individuales ya no
-sean perceptibles, aún deberías poder ver la extensión y variedad del desarrollo en cada vecindario,
-no solo para los edificios más voluminosos.</li>
-</ul>
-<p>Esto hace que la calidad de los resultados de Tippecanoe sea muy superior a otras alternativas, que utilizan algoritmos
-de simplificación más convencionales, motivo por el cual lo recomendamos en este taller.</p>
-<p>Además, es sorprendentemente rápido procesando los datos.</p>
-<h2 id="creando-el-fichero-mbtiles">Creando el fichero mbtiles</h2>
-<p>Vamos a crear un fichero mbtiles llamado <em>natural_earth.mbtiles</em> que contendrá nuestras 10 capas. </p>
-<p>Para crear el mbtiles utilizaremos las siguientes <a href="https://github.com/mapbox/tippecanoe#options">opciones del Tippecanoe</a>:</p>
-<ul>
-<li><code>-o nombre.mbtiles</code>: nombre del archivo de salida.</li>
-<li><code>-zg</code>: Estima un maxzoom razonable basado en la resolución de los datos.</li>
-<li><code>--drop-densest-as-needed</code>: Si una tesela es demasiado pesada, intenta reducirla a menos de 500 KB reduciendo su detalle.</li>
-<li><code>-L nombre:archivo.json</code>: permite definir nombres de capa para cada archivo individual.</li>
-</ul>
-<p>Para generar el archivo mbtiles escribiremos lo siguiente en el terminal:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nb">cd</span> naturalearth
-tippecanoe -o natural_earth.mbtiles -zg --drop-densest-as-needed <span class="se">\</span>
-  -L ocean:ne_10m_ocean.geojson <span class="se">\</span>
-  -L land:ne_10m_land.geojson <span class="se">\</span>
-  -L admin:ne_10m_admin_0_countries.geojson <span class="se">\</span>
-  -L coastline:ne_10m_coastline.geojson <span class="se">\</span>
-  -L lakes:ne_10m_lakes.geojson <span class="se">\</span>
-  -L rivers:ne_10m_rivers_lake_centerlines.geojson <span class="se">\</span>
-  -L rail:ne_10m_railroads.geojson <span class="se">\</span>
-  -L roads:ne_10m_roads.geojson <span class="se">\</span>
-  -L cities:ne_10m_populated_places.geojson <span class="se">\</span>
-  -L airports:ne_10m_airports.geojson
-</pre></div>
-</td></tr></table>
-
-<h2 id="publicando-el-mbtiles">Publicando el mbtiles</h2>
-<p>Añadiremos el mbtiles a <code>Tileserver GL</code> igual que hicimos con los edificios de Barcelona:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>mv natural_earth.mbtiles ../../tileserver/data
-cd ../../tileserver
-</pre></div>
-</td></tr></table>
-
-<p>Editamos <code>config.json</code> y añadimos la nueva capa:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">{</span>
-  <span class="err">...</span>
-  <span class="nt">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="nt">&quot;v3&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;mbtiles&quot;</span><span class="p">:</span> <span class="s2">&quot;barcelona.mbtiles&quot;</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;buildings&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;mbtiles&quot;</span><span class="p">:</span> <span class="s2">&quot;buildings.mbtiles&quot;</span>
-    <span class="p">},</span>
-<span class="hll">    <span class="nt">&quot;natural_earth&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span class="hll">      <span class="nt">&quot;mbtiles&quot;</span><span class="p">:</span> <span class="s2">&quot;natural_earth.mbtiles&quot;</span>
-</span><span class="hll">    <span class="p">}</span>
-</span>  <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
-
-<p>Tras parar y arrancar el <code>tileserver</code> de nuevo, abrir el navegador y escribir <a href="http://localhost:8081">http://localhost:8081</a> y comprobar que
-aparece la página del TileServer con nuestro mbtiles:</p>
-<p><img alt="TileServer GL Light" src="../img/mbtiles_tippecanoe.png" /></p>
-<p>Hacer click en el botón de <strong>Inspect</strong> y comprobar que en el mapa aparecen todas las capas agregadas al mbtiles:</p>
-<p><img alt="Mbtiles Natural Earth" src="../img/natural_earth_mbtiles.png" /></p>
-<p>Así pues, una tesela vectorial contiene varias "capas" internamente. En una regla de simbolización, deberá indicarse
-tanto origen de datos (<code>"source": "natural_earth"</code>), como la capa dentro de la tesela (<code>"source_layer": "roads"</code>).</p>
+                <h1 id="iconos-y-tipografias">Iconos y tipografías</h1>
+<p>sprites y glyphs</p>
+<p><code>[Caso práctico: mapbox/spritezero, openmaptiles/fonts]</code></p>
                 
                   
                 
@@ -552,6 +393,41 @@ tanto origen de datos (<code>"source": "natural_earth"</code>), como la capa den
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../04_OGC/" title="4. Servicios estándar" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Anterior
+                </span>
+                4. Servicios estándar
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../06_estilos/" title="6. Cómo simbolizarlas" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Siguiente
+                </span>
+                6. Cómo simbolizarlas
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
