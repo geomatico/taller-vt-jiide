@@ -375,6 +375,54 @@
                 
                 
                 <h1 id="servicio-basico-de-teselas-vectoriales">Servicio básico de teselas vectoriales</h1>
+<h1 id="especificacion-tilejson">Especificación <em>TileJSON</em></h1>
+<p>Metadatos: Capas y atributos. También nombre, atribución, minZoom, maxZoom.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;tilejson&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span>
+  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Catastro Building Parts&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;tiles&quot;</span><span class="p">:[</span><span class="s2">&quot;http://tileserver.fonts.cat/data/buildingpart/{z}/{x}/{y}.pbf&quot;</span><span class="p">],</span>
+  <span class="nt">&quot;minzoom&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+  <span class="nt">&quot;maxzoom&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+  <span class="nt">&quot;bounds&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.038039</span><span class="p">,</span> <span class="mf">41.278439</span><span class="p">,</span> <span class="mf">2.268328</span><span class="p">,</span> <span class="mf">41.573783</span><span class="p">],</span>
+  <span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;overlay&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;attribution&quot;</span><span class="p">:</span> <span class="s2">&quot;Catastro&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;vector_layers&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;buildingpart&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;minzoom&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+      <span class="nt">&quot;maxzoom&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="nt">&quot;fields&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&quot;floors&quot;</span><span class="p">:</span> <span class="s2">&quot;Number&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;parcel&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
 <p>Especificación TileJSON, servicio XYZ.</p>
 <p><code>[Caso práctico: tilserver-gl]</code></p>
                 

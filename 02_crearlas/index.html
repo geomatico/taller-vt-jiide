@@ -265,9 +265,65 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        2. Cómo crearlas
+      </label>
+    
     <a href="./" title="2. Cómo crearlas" class="md-nav__link md-nav__link--active">
       2. Cómo crearlas
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#especificacion-mbtiles" title="Especificación .mbtiles" class="md-nav__link">
+    Especificación .mbtiles
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vista-tiles" title="Vista tiles" class="md-nav__link">
+    Vista tiles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-metadata" title="Tabla metadata" class="md-nav__link">
+    Tabla metadata
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caso-practico-generacion-de-una-piramide-de-teselas-vectoriales-con-tippecanoe" title="Caso práctico: generación de una pirámide de teselas vectoriales con tippecanoe" class="md-nav__link">
+    Caso práctico: generación de una pirámide de teselas vectoriales con tippecanoe
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -361,6 +417,49 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#especificacion-mbtiles" title="Especificación .mbtiles" class="md-nav__link">
+    Especificación .mbtiles
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vista-tiles" title="Vista tiles" class="md-nav__link">
+    Vista tiles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabla-metadata" title="Tabla metadata" class="md-nav__link">
+    Tabla metadata
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caso-practico-generacion-de-una-piramide-de-teselas-vectoriales-con-tippecanoe" title="Caso práctico: generación de una pirámide de teselas vectoriales con tippecanoe" class="md-nav__link">
+    Caso práctico: generación de una pirámide de teselas vectoriales con tippecanoe
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -375,8 +474,103 @@
                 
                 
                 <h1 id="creacion-y-almacenaje-de-teselas-vectoriales">Creación y almacenaje de teselas vectoriales</h1>
-<p>Especificación mvt, formato pbf, fichero mbtiles.</p>
-<p><code>[Caso práctico: tippecanoe]</code></p>
+<p>Generar las teselas vectoriales al vuelo es lento, y se recomienda, en la medida de lo posible, tenerlas cacheadas.</p>
+<p>Almacenar una pirámide de teselas en una estructura de directorios, cuando se tiene una cantidad importante de datos, es
+también ineficiente, por lo que Mapbox creó el foramto mbtiles.</p>
+<h2 id="especificacion-mbtiles">Especificación <em><code>.mbtiles</code></em></h2>
+<p>Mbtiles contiene toda una pirámide de teselas en un solo fichero, que es una BDD sqlite.</p>
+<p>Pirámide de teselas guardada en una BDD SQLite, con un esquema determinado. Tablas principales:</p>
+<h3 id="vista-tiles">Vista <code>tiles</code></h3>
+<table>
+<thead>
+<tr>
+<th>zoom_level</th>
+<th>tile_column</th>
+<th>tile_row</th>
+<th>tile_data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{z}</td>
+<td>{x}</td>
+<td>{y}</td>
+<td>{BLOB}</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tabla-metadata">Tabla <code>metadata</code></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>format</code></td>
+<td>"<em>pbf</em>"</td>
+</tr>
+<tr>
+<td><code>attribution</code></td>
+<td>"(c) OpenStreetMap..."</td>
+</tr>
+<tr>
+<td><code>minZoom</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>maxZoom</code></td>
+<td>14</td>
+</tr>
+<tr>
+<td><code>BBOX</code></td>
+<td>-180,-85.06,180,85.06</td>
+</tr>
+<tr>
+<td><code>json</code></td>
+<td>(capas contenidas en cada tesela, y su "feature type")</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Un fichero mbtiles puede contener teselas de cualquier tipo, también de formato imagen. Esto no se deduce de la extensión del fichero.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Mbtiles no es equivalente a geopackage. Aunque ambos son esencialmente una BDD SQLite, guardan los datos en una estructura distinta y tienen diferente propósito.</p>
+</div>
+<h2 id="caso-practico-generacion-de-una-piramide-de-teselas-vectoriales-con-tippecanoe">Caso práctico: generación de una pirámide de teselas vectoriales con tippecanoe</h2>
+<ol>
+<li>
+<p>Instalar <a href="https://github.com/mapbox/tippecanoe">mapbox/tippecanoe</a>. Esto es muy sencillo en un Mac con brew, algo
+    menos sencillo en Ubuntu (hay que asegurarse de tener todas las dependencias y compilar), y no está definido cómo
+    compilarlo en Windows.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>También se puede usar alguna de las <a href="https://hub.docker.com/search/?isAutomated=0&amp;isOfficial=0&amp;page=1&amp;pullCount=0&amp;q=tippecanoe&amp;starCount=0">imágenes docker</a> disponibles.</p>
+</div>
+</li>
+<li>
+<p>A partir del fichero <code>buildings.geojson</code> en:</p>
+<p><a href="https://github.com/geomatico/taller-vt-jiide/tree/master/ejercicios/02">https://github.com/geomatico/taller-vt-jiide/tree/master/ejercicios/02</a></p>
+<p>Ejecutar el comando de tippecanoe:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>tippecanoe -L buildingpart:buildingpart.geojson -Z 12 -z 16 -n &quot;Catastro Building Parts&quot; -o buildingpart.mbtiles -A &quot;Catastro&quot;
+</pre></div>
+</td></tr></table>
+
+<p>Esto generará el fichero <code>buildings.mbtiles</code>.</p>
+</li>
+<li>
+<p>Abrir el fichero resultante con un administrador de bases de datos SQLite, y se podrá observar la estructura de datos mencionada.</p>
+</li>
+<li>
+<p>QGIS tiene un plugin llamado "Vector Tiles Reader" para poder visualizar los datos. No es muy rápido ni estable, pero
+puede servir para inspeccionar los datos.</p>
+</li>
+</ol>
                 
                   
                 
