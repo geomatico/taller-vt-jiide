@@ -41,17 +41,15 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "http://tileserver.fonts.cat/data/menorca_base.json",
-      "attribution": "<a href=\"http://www.openmaptiles.org/\" target=\"_blank\">&copy; OpenMapTiles</a> <a href=\"http://www.openstreetmap.org/about/\" target=\"_blank\">&copy; OpenStreetMap contributors</a>"
+      "url": "https://tileserver.fonts.cat/data/menorca_base.json"
     },
     "buildingpart": {
       "type": "vector",
-      "url": "http://tileserver.fonts.cat/fonts/menorca_buildings.json",
-      "attribution": "<a href=\"http://www.sedecatastro.gob.es/\" target=\"_blank\">&copy; D. G. Catastro</a>"
+      "url": "https://tileserver.fonts.cat/data/menorca_buildings.json"
     }
   },
-  "sprite": "styles/osm-bright/sprite",
-  "glyphs": "fonts/{fontstack}/{range}.pbf",
+  "sprite": "https://geomati.co/taller-vt-jiide/ejemplos/menorca-online-style/sprite",
+  "glyphs": "https://tileserver.fonts.cat/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
@@ -3590,10 +3588,7 @@
       "source-layer": "buildingpart",
       "paint": {
         "fill-extrusion-color": "#d9c7a5",
-        "fill-extrusion-height": {
-          "type": "identity",
-          "property": "floors"
-        },
+        "fill-extrusion-height": ["*", 3, ["get", "floors"]],
         "fill-extrusion-base": 0,
         "fill-extrusion-opacity": 0.6
       }
