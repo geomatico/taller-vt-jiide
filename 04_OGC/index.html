@@ -90,7 +90,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#servicios-de-teselas-vectoriales-mediante-estandares-ogc" tabindex="1" class="md-skip">
+      <a href="../#integracion-de-las-teselas-vectoriales-con-servicios-estandar-ogc" tabindex="1" class="md-skip">
         Saltar a contenido
       </a>
     
@@ -289,9 +289,85 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        4. Servicios estándar
+      </label>
+    
     <a href="./" title="4. Servicios estándar" class="md-nav__link md-nav__link--active">
       4. Servicios estándar
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#caso-practico-la-extension-vector-tiles-de-geoserver" title="Caso práctico: La extensión Vector Tiles de GeoServer" class="md-nav__link">
+    Caso práctico: La extensión Vector Tiles de GeoServer
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-de-integracion-con-otros-servicios-de-ogc" title="Ejemplos de integración con otros servicios de OGC" class="md-nav__link">
+    Ejemplos de integración con otros servicios de OGC
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wms" title="WMS:" class="md-nav__link">
+    WMS:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wmts" title="WMTS:" class="md-nav__link">
+    WMTS:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wfs" title="WFS:" class="md-nav__link">
+    WFS:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teselas-vectoriales-como-tms" title="Teselas Vectoriales como TMS:" class="md-nav__link">
+    Teselas Vectoriales como TMS:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -361,6 +437,69 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#caso-practico-la-extension-vector-tiles-de-geoserver" title="Caso práctico: La extensión Vector Tiles de GeoServer" class="md-nav__link">
+    Caso práctico: La extensión Vector Tiles de GeoServer
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ejemplos-de-integracion-con-otros-servicios-de-ogc" title="Ejemplos de integración con otros servicios de OGC" class="md-nav__link">
+    Ejemplos de integración con otros servicios de OGC
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wms" title="WMS:" class="md-nav__link">
+    WMS:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wmts" title="WMTS:" class="md-nav__link">
+    WMTS:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wfs" title="WFS:" class="md-nav__link">
+    WFS:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teselas-vectoriales-como-tms" title="Teselas Vectoriales como TMS:" class="md-nav__link">
+    Teselas Vectoriales como TMS:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -374,11 +513,176 @@
                   <a href="https://github.com/geomatico/taller-vt-jiide/edit/master/docs/04_OGC.md" title="Editar esta página" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="servicios-de-teselas-vectoriales-mediante-estandares-ogc">Servicios de teselas vectoriales mediante estándares OGC</h1>
+                <h1 id="integracion-de-las-teselas-vectoriales-con-servicios-estandar-ogc">Integración de las teselas vectoriales con servicios estándar OGC</h1>
 <p>Las teselas vectoriales están pensadas para su <em>visualización</em>, <strong>no son un servicio de descarga</strong>. Por tanto, la
 manera de servirlas mediante estándares OGC es usando WMTS para la versión teselada, e incluso WMTS si quisiéramos
 servir el mismo formato pero sin el teselado.</p>
-<p><code>[Caso práctico: geoserver]</code></p>
+<p>En definitiva, podríamos considerar las teselas vectoriales como un nuevo formato de "imagen". Igual que tenemos
+<code>image/jpeg</code> o <code>image/png</code>, podríamos incluír un nuevo tipo MIME en las capabilities de nuestros servicios WMS y WMTS
+que sirviera los datos codificados en MVT.</p>
+<p>Esto es precisamente lo que hace la <a href="https://docs.geoserver.org/stable/en/user/extensions/vectortiles/install.html">extensión Vector Tiles de GeoServer</a>
+cuando define el nuevo tipo MIME:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>application/x-protobuf;type=mapbox-vector
+</pre></div>
+</td></tr></table>
+
+<h2 id="caso-practico-la-extension-vector-tiles-de-geoserver">Caso práctico: La extensión Vector Tiles de GeoServer</h2>
+<ol>
+<li>
+<p>Entrar en <a href="http://demo.fonts.cat/geoserver/">http://demo.fonts.cat/geoserver/</a></p>
+</li>
+<li>
+<p>Explorar el GetCapabilities del servicio WMS. Buscar cómo están anunciadas las capas de teselas vectoriales.</p>
+</li>
+<li>
+<p>Explorar las Capabilities de los servicios WMTS, TMS y WMS-C, y comprobar si existen capas de teselas vectoriales.</p>
+</li>
+<li>
+<p>Entrar como administrador, y observar cómo está configurado GeoWebCaché para las capas que sirven teselas vectoriales.</p>
+</li>
+<li>
+<p>Discutir ventajas y limitaciones de GeoServer.</p>
+</li>
+</ol>
+<h3 id="ejemplos-de-integracion-con-otros-servicios-de-ogc">Ejemplos de integración con otros servicios de OGC</h3>
+<h4 id="wms">WMS:</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="err">&#39;sources&#39;:</span> <span class="p">{</span>
+      <span class="err">&#39;wms-source&#39;:</span> <span class="err">{</span>
+        <span class="err">&#39;type&#39;:</span> <span class="err">&#39;raster&#39;,</span>
+        <span class="err">&#39;tiles&#39;:</span> <span class="err">[</span>
+          <span class="err">&#39;http://www.ign.es/wms-inspire/pnoa-ma?bbox={bbox-epsg-3857</span><span class="p">}</span><span class="err">&amp;format=image/jpeg&amp;service=WMS&amp;version=</span><span class="mf">1.1</span><span class="err">.</span><span class="mi">1</span><span class="err">&amp;request=GetMap&amp;srs=EPSG:</span><span class="mi">3857</span><span class="err">&amp;width=</span><span class="mi">256</span><span class="err">&amp;height=</span><span class="mi">256</span><span class="err">&amp;layers=OI.OrthoimageCoverage&#39;</span>
+        <span class="err">],</span>
+        <span class="err">&#39;tileSize&#39;:</span> <span class="mi">256</span>
+      <span class="err">}</span>
+    <span class="err">},</span>
+    <span class="err">&#39;layers&#39;:</span> <span class="p">[{</span>
+      <span class="err">&#39;id&#39;:</span> <span class="err">&#39;wms-layer&#39;,</span>
+      <span class="err">&#39;type&#39;:</span> <span class="err">&#39;raster&#39;,</span>
+      <span class="err">&#39;source&#39;:</span> <span class="err">&#39;wms-source&#39;</span>
+    <span class="p">}]</span>
+</pre></div>
+</td></tr></table>
+
+<p><a href="../ejemplos/wms-pnoa.html"><strong>DEMO</strong> WMS imagen</a></p>
+<p><img alt="Visor PNOA" src="../img/visor-pnoa.png" /></p>
+<h4 id="wmts">WMTS:</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="err">&#39;sources&#39;:</span> <span class="p">{</span>
+      <span class="err">&#39;wmts-source&#39;:</span> <span class="err">{</span>
+        <span class="err">&#39;type&#39;:</span> <span class="err">&#39;raster&#39;,</span>
+        <span class="err">&#39;tiles&#39;:</span> <span class="err">[</span>
+          <span class="err">&#39;http://www.ign.es/wmts/pnoa-ma?Layer=OI.OrthoimageCoverage&amp;Style=default&amp;TileMatrixSet=GoogleMapsCompatible&amp;Service=WMTS&amp;Request=GetTile&amp;Version=1.0.0&amp;Format=image/jpeg&amp;TileMatrix={z</span><span class="p">}</span><span class="err">&amp;TileCol=</span><span class="p">{</span><span class="err">x</span><span class="p">}</span><span class="err">&amp;TileRow=</span><span class="p">{</span><span class="err">y</span><span class="p">}</span><span class="err">&#39;</span>
+        <span class="err">],</span>
+        <span class="err">&#39;tileSize&#39;:</span> <span class="mi">256</span>
+      <span class="err">}</span>
+    <span class="err">},</span>
+    <span class="err">&#39;layers&#39;:</span> <span class="p">[{</span>
+      <span class="err">&#39;id&#39;:</span> <span class="err">&#39;wmts-layer&#39;,</span>
+      <span class="err">&#39;type&#39;:</span> <span class="err">&#39;raster&#39;,</span>
+      <span class="err">&#39;source&#39;:</span> <span class="err">&#39;wmts-source&#39;</span>
+    <span class="p">}]</span>
+</pre></div>
+</td></tr></table>
+
+<p><a href="../ejemplos/wmts-pnoa.html"><strong>DEMO</strong> WMTS imagen</a></p>
+<h4 id="wfs">WFS:</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="err">&#39;sources&#39;:</span> <span class="p">{</span>
+      <span class="err">&#39;geojson-source&#39;:</span> <span class="err">{</span>
+        <span class="err">&#39;type&#39;:</span> <span class="err">&#39;geojson&#39;,</span>
+        <span class="err">&#39;data&#39;:</span> <span class="err">&#39;http://demo.fonts.cat/geoserver/wfs?SERVICE=WFS&amp;VERSION=1.1.0&amp;REQUEST=GetFeature&amp;TYPENAME=TMB:LINIES_METRO&amp;outputFormat=json&amp;srsName=EPSG:4326&#39;</span>
+      <span class="p">}</span>
+    <span class="err">},</span>
+    <span class="err">&#39;layers&#39;:</span> <span class="p">[{</span>
+      <span class="err">&#39;id&#39;:</span> <span class="err">&#39;geojson-layer&#39;,</span>
+      <span class="err">&#39;type&#39;:</span> <span class="err">&#39;line&#39;,</span>
+      <span class="err">&#39;source&#39;:</span> <span class="err">&#39;geojson-source&#39;,</span>
+      <span class="err">&#39;paint&#39;:</span> <span class="err">{</span>
+        <span class="err">&#39;line-width&#39;:</span> <span class="err">5,</span>
+        <span class="err">&#39;line-color&#39;:</span> <span class="err">[&#39;concat&#39;,</span> <span class="err">&#39;#&#39;,</span> <span class="err">[&#39;get&#39;,</span> <span class="err">&#39;COLOR_LINIA&#39;]]</span>
+      <span class="p">}</span>
+    <span class="err">}</span><span class="p">]</span>
+</pre></div>
+</td></tr></table>
+
+<p><a href="../ejemplos/wfs-geojson.html"><strong>DEMO</strong> WMTS imagen + WFS GeoJSON</a></p>
+<p><img alt="Visor Metro" src="../img/visor-metro.png" /></p>
+<h4 id="teselas-vectoriales-como-tms">Teselas Vectoriales como TMS:</h4>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="err">&#39;sources&#39;:</span> <span class="p">{</span>
+      <span class="err">&#39;vectortile-tms-source&#39;:</span> <span class="err">{</span>
+        <span class="err">&#39;type&#39;:</span> <span class="err">&#39;vector&#39;,</span>
+        <span class="err">&#39;tiles&#39;:</span> <span class="err">[&#39;http://demo.fonts.cat:8000/geoserver/gwc/service/tms/1.0.0/TMB%3ALINIES_METRO@EPSG%3A900913@pbf/{z</span><span class="p">}</span><span class="err">/</span><span class="p">{</span><span class="err">x</span><span class="p">}</span><span class="err">/</span><span class="p">{</span><span class="err">y</span><span class="p">}</span><span class="err">.pbf&#39;],</span>
+        <span class="err">&#39;scheme&#39;:</span> <span class="err">&#39;tms&#39;</span>
+      <span class="err">}</span>
+    <span class="err">},</span>
+    <span class="err">&#39;layers&#39;:</span> <span class="p">[{</span>
+      <span class="err">&#39;id&#39;:</span> <span class="err">&#39;vectortile-layer&#39;,</span>
+      <span class="err">&#39;type&#39;:</span> <span class="err">&#39;line&#39;,</span>
+      <span class="err">&#39;source&#39;:</span> <span class="err">&#39;vectortile-tms-source&#39;,</span>
+      <span class="err">&#39;source-layer&#39;:</span> <span class="err">&#39;LINIES_METRO&#39;,</span>
+      <span class="err">&#39;paint&#39;:</span> <span class="err">{</span>
+        <span class="err">&#39;line-width&#39;:</span> <span class="err">5,</span>
+        <span class="err">&#39;line-color&#39;:</span> <span class="err">[&#39;concat&#39;,</span> <span class="err">&#39;#&#39;,</span> <span class="err">[&#39;get&#39;,</span> <span class="err">&#39;COLOR_LINIA&#39;]]</span>
+      <span class="p">}</span>
+    <span class="err">}</span><span class="p">]</span>
+</pre></div>
+</td></tr></table>
+
+<p><a href="../ejemplos/tms-vector.html"><strong>DEMO</strong> WMTS imagen + Vector Tile TMS</a></p>
                 
                   
                 
