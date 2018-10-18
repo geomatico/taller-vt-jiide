@@ -311,8 +311,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#caso-practico-generacion-de-una-piramide-de-teselas-vectoriales-con-tippecanoe" title="Caso práctico: generación de una pirámide de teselas vectoriales con tippecanoe" class="md-nav__link">
-    Caso práctico: generación de una pirámide de teselas vectoriales con tippecanoe
+  <a href="#tippecanoe" title="Tippecanoe" class="md-nav__link">
+    Tippecanoe
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caso-practico-generacion-de-una-piramide-de-teselas-vectoriales" title="Caso práctico: generación de una pirámide de teselas vectoriales" class="md-nav__link">
+    Caso práctico: generación de una pirámide de teselas vectoriales
   </a>
   
 </li>
@@ -448,8 +455,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#caso-practico-generacion-de-una-piramide-de-teselas-vectoriales-con-tippecanoe" title="Caso práctico: generación de una pirámide de teselas vectoriales con tippecanoe" class="md-nav__link">
-    Caso práctico: generación de una pirámide de teselas vectoriales con tippecanoe
+  <a href="#tippecanoe" title="Tippecanoe" class="md-nav__link">
+    Tippecanoe
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caso-practico-generacion-de-una-piramide-de-teselas-vectoriales" title="Caso práctico: generación de una pirámide de teselas vectoriales" class="md-nav__link">
+    Caso práctico: generación de una pirámide de teselas vectoriales
   </a>
   
 </li>
@@ -542,7 +556,25 @@ también ineficiente, por lo que Mapbox creó el foramto mbtiles.</p>
 <p class="admonition-title">Warning</p>
 <p>Mbtiles no es equivalente a geopackage. Aunque ambos son esencialmente una BDD SQLite, guardan los datos en una estructura distinta y tienen diferente propósito.</p>
 </div>
-<h2 id="caso-practico-generacion-de-una-piramide-de-teselas-vectoriales-con-tippecanoe">Caso práctico: generación de una pirámide de teselas vectoriales con tippecanoe</h2>
+<h2 id="tippecanoe">Tippecanoe</h2>
+<p><a href="https://github.com/mapbox/tippecanoe">Tippecanoe</a> es la herramienta que permite crear teselas vectoriales de
+grandes colecciones de elementos en formato GeoJSON.</p>
+<p>El objetivo de Tippecanoe es permitir una visión de sus datos independiente de la escala, de modo que en cualquier
+nivel, desde el mundo entero hasta un solo edificio, se pueda apreciar la densidad y la textura de los datos, en
+lugar de una simplificación geométrica, que puede eliminar vértices importantes que cambien la apariencia de los datos
+en su versión simplificada.</p>
+<p>Algunos ejemplos:</p>
+<ul>
+<li>Teniendo todo el callejero de OpenStreetMap, la vista general devolverá algo que se parece a
+"Todas las calles" en lugar de algo que parece un atlas de carreteras interestatal.</li>
+<li>Teniendo todas las plantas de edificios de una ciudad, en la vista general donde los edificios individuales ya no
+sean perceptibles, aún deberías poder ver la extensión y variedad del desarrollo en cada vecindario,
+no solo para los edificios más voluminosos.</li>
+</ul>
+<p>Esto hace que la calidad de los resultados de Tippecanoe sea muy superior a otras alternativas, que utilizan algoritmos
+de simplificación más convencionales, motivo por el cual lo recomendamos en este taller.</p>
+<p>Además, es sorprendentemente rápido procesando los datos.</p>
+<h2 id="caso-practico-generacion-de-una-piramide-de-teselas-vectoriales">Caso práctico: generación de una pirámide de teselas vectoriales</h2>
 <ol>
 <li>
 <p>Instalar <a href="https://github.com/mapbox/tippecanoe">mapbox/tippecanoe</a>. Esto es muy sencillo en un Mac con brew, algo

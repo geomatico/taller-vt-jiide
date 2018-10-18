@@ -277,9 +277,45 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        3. Cómo servirlas
+      </label>
+    
     <a href="./" title="3. Cómo servirlas" class="md-nav__link md-nav__link--active">
       3. Cómo servirlas
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#especificacion-tilejson" title="Especificación TileJSON" class="md-nav__link">
+    Especificación TileJSON
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caso-practico-explorando-una-instancia-de-tileserver-gl" title="Caso práctico: Explorando una instancia de Tileserver GL" class="md-nav__link">
+    Caso práctico: Explorando una instancia de Tileserver GL
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -361,6 +397,29 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Tabla de contenidos</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#especificacion-tilejson" title="Especificación TileJSON" class="md-nav__link">
+    Especificación TileJSON
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caso-practico-explorando-una-instancia-de-tileserver-gl" title="Caso práctico: Explorando una instancia de Tileserver GL" class="md-nav__link">
+    Caso práctico: Explorando una instancia de Tileserver GL
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -375,8 +434,14 @@
                 
                 
                 <h1 id="servicio-basico-de-teselas-vectoriales">Servicio básico de teselas vectoriales</h1>
-<h1 id="especificacion-tilejson">Especificación <em>TileJSON</em></h1>
-<p>Metadatos: Capas y atributos. También nombre, atribución, minZoom, maxZoom.</p>
+<p>Un servicio de teselas <em>a la google</em> o de tipo "XYZ" consiste en una URL donde se sustituyen los valores de zoom, fila y
+columna siguiendo una plantilla, como en:</p>
+<p><a href="http://tileserver.fonts.cat/data/buildingpart/{z}/{x}/{y}.pbf">http://tileserver.fonts.cat/data/buildingpart/{z}/{x}/{y}.pbf</a></p>
+<p>Se supone una proyección determinada, <code>EPSG:3857</code>, y un esquema de teselado determinado. Nada se sabe sobre el rango
+de zooms o el ámbito geográfico de los datos (BBXOX), su atribución, o su contenido. Por ello mapbox ideó un fichero
+de metadatos para publicar esta información de forma estándar: la especificación <em>TileJSON</em>.</p>
+<h2 id="especificacion-tilejson">Especificación <em>TileJSON</em></h2>
+<p>Este fichero de "metadatos" vendría a ser algo entre un GetCapabilities de mínimos, y un DescribeFeatureType:</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
@@ -423,8 +488,42 @@
 </pre></div>
 </td></tr></table>
 
-<p>Especificación TileJSON, servicio XYZ.</p>
-<p><code>[Caso práctico: tilserver-gl]</code></p>
+<h2 id="caso-practico-explorando-una-instancia-de-tileserver-gl">Caso práctico: Explorando una instancia de Tileserver GL</h2>
+<p><a href="http://tileserver.org/">TileServer GL</a> es un servidor de mapas de código abierto creado para teselas vectoriales, y
+capaz de renderizar en teselas raster con MapBox GL Native engine en el lado del servidor.</p>
+<p>Proporciona mapas para aplicaciones web y móviles. Es compatibles con Mapbox GL JS, Android SDK, iOS SDK, Leaflet,
+OpenLayers, HighDPI/Retina, SIG a través de WMTS, etc.</p>
+<p>Si se quiere servir teselas raster lo mejor es utilizar la versión de Docker ya que son necesarias algunas librerías
+nativas que pueden variar dependiendo de la plataforma, estas librerías sirven para renderizar las teselas vectoriales
+en teselas raster. Si únicamente se quiere servir teselas vectoriales se puede utilizar el TileServer GL Light,
+que no tiene ninguna dependencia nativa ya que está desarrollado en javascript.</p>
+<ol>
+<li>
+<p>Abrir <a href="http://tileserver.fonts.cat">http://tileserver.fonts.cat</a> en un navegador</p>
+</li>
+<li>
+<p>Explorar la sección "DATA":</p>
+<ul>
+<li>Documento <code>TileJSON</code></li>
+<li>Inspector</li>
+</ul>
+</li>
+<li>
+<p>Explorar la sección "STYLES":</p>
+<ul>
+<li>Documento <code>TileJSON</code>. No siempre. Diferencias con el anterior.</li>
+<li>Viewers: Vector y Raster. Similitudes y diferencias.</li>
+<li>Servicio WMTS. Sólo para imagen.</li>
+<li>Estructura de un documento GL Style:<ul>
+<li>Sprites  </li>
+<li>Glyphs (y el endpoint oculto: <a href="http://tileserver.fonts.cat/fonts.json">http://tileserver.fonts.cat/fonts.json</a>)</li>
+<li>Sources</li>
+<li>Layers</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
                 
                   
                 
