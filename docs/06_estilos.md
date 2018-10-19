@@ -210,4 +210,8 @@ Con las expresiones podemos definir formulas que modifican el valor de las propi
 }
 ```
 
-`[Caso práctico: maputnik]`
+## Caso práctico: Menorca Online
+
+Cargar Menorca Online en el navegador e inspeccionar cómo está hecho:
+
+http://geomati.co/taller-vt-jiide/ejemplos/menorca-online.html

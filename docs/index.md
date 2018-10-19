@@ -31,13 +31,9 @@ Este manual está publicado aquí:
 
 6. **Especificación de estilo** "Mapbox GL Style spec".
 
-    `[Caso práctico: sources, layers y expressions]`
-
-7. **Visor web** basado en "Mapbox GL JS".
-
     `[Caso práctico: "Menorca Online"]`
 
-8. **Recursos adicionales**
+7. **Recursos adicionales**
 
 
 ## Autores
