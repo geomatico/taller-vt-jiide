@@ -93,46 +93,23 @@ A partir de los recursos de este enlace:
 
 1. Cargar la base de datos `vt_dump`, que contiene los barrios de Barcelona, mediante psql. El comando sería:
 
-        psql -U postgres -W < vt_dump.sql
+        sudo -u postgres psql < vt_dump.sql
     
 2. Conectándonos a la nueva base de datos `vt`, con usuario `vt`, y password `vt`:
 
-    * Creamos una función auxiliar que calcula el BBOX de una tesela en función de los parámetros (x, y, z):
-
-        ```postgresql
-        CREATE OR REPLACE FUNCTION BBox(z integer, x integer, y integer)
-            RETURNS geometry AS
-        $BODY$
-        DECLARE
-            max numeric := 6378137 * pi();
-            res numeric := max * 2 / 2^z;
-        BEGIN
-            return ST_MakeEnvelope(
-                -max + (x * res),
-                max - (y * res),
-                -max + (x * res) + res,
-                max - (y * res) - res,
-                3857);
-        END;
-        $BODY$
-          LANGUAGE plpgsql;
-        ```
-        
     * Ejecutamos la consulta que nos devuelve la tesela de zoom=13, x=4145 e y=3059, de la siguiente manera:
         
         ```postgresql
-        SELECT ST_AsMVT(q, 'mvt_barrios')
-        FROM (
-          SELECT gid, n_barri,
-            ST_AsMVTGeom(
-              geom,
-              BBox(13, 4145, 3059),
-              4096,
-              0
-            ) AS geom
-          FROM barrios
-          WHERE geom && BBox(13, 4145, 3059)
-        ) AS q;
+         SELECT ST_AsMVT(q, 'mvt_barrios')
+         FROM (
+           SELECT gid, n_barri,
+             ST_AsMVTGeom(
+               geom,
+               ST_TileEnvelope(13, 4145, 3059)
+             ) AS geom
+           FROM barrios
+           WHERE geom && ST_TileEnvelope(13, 4145, 3059)
+         ) AS q;
         ```
 
 La tesela resultante correspondería a este área de Barcelona:
@@ -143,4 +120,4 @@ Obviamente, generar una sola tesela no tiene sentido. Pero ya tenemos la pieza p
 o construir un servicio web de tipo `{z}/{x}/{y}`.
 
 Esta capacidad la utilizan múltiples implementaciones como tegola, t-rex, o el generador de teselas de OpenMapTiles, llamado
-[postserve](https://github.com/openmaptiles/postserve/blob/master/server.py#L27).
+[postserve](https://github.com/openmaptiles/postserve/blob/master/server.py#L32).

@@ -3,7 +3,7 @@
 Bienvenidos al taller de teselas vectoriales en la IDE.
 Este manual está publicado aquí:
 
-# http://geomati.co/taller-vt-jiide
+# https://labs.geomatico.es/taller-vt-jiide
 
 !!! danger Requisito imprescindible es tener un navegador con capacidades WebGL.
 

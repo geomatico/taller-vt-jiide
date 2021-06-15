@@ -1,6 +1,6 @@
 # Teselas Vectoriales en la IDE
 
-# http://geomati.co/taller-vt-jiide
+# https://labs.geomatico.es/taller-vt-jiide
 
 ## Herramienta de documentación
 
@@ -9,7 +9,7 @@ Se usa [mkdocs](http://mkdocs.org) con el tema [mkdocs-material](https://squidfu
 Desinstalar versiones anteriores de mkdocs:
 
 ```bash
-    sudo pip uninstall mkdocs
+pip uninstall mkdocs
 ```
 
 E instalar con el comando:

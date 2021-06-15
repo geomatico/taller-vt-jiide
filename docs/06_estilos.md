@@ -8,12 +8,12 @@ La [especifiación de Mapbox](https://www.mapbox.com/mapbox-gl-js/style-spec) es
 
 ## Root
 
-En la raiz del estilo definiremos varias de las propiedades globales del mismo, como son la *version* de la especifiación que estamos usando y el *name* o nombre que le asignamos al estilo.
+En la raiz del estilo definiremos varias de las propiedades globales del mismo, como son la *version* de la especificación que estamos usando y el *name* o nombre que le asignamos al estilo.
 
 ```json
 {
     "version": 8,
-    "name": "Menorca Online"
+    "name": "Menorca Base"
 }
 ```
 
@@ -22,7 +22,7 @@ Algunas otras propiedades serán las que indicarán la posición inicial del map
 ```json hl_lines="4 5 6 7 8 9 10"
 {
     "version": 8,
-    "name": "Menorca Online",
+    "name": "Menorca Base",
 	"center": [
             4.264113,
             39.892787
@@ -38,9 +38,9 @@ Sprite y glyphs irian indicadas en esta sección también
 ```json hl_lines="4 5"
 {
     "version": 8,
-    "name": "Menorca Online",
-    "sprite": "mapbox://sprites/mapbox/streets-v8",
-    "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+    "name": "Menorca Base",
+    "sprite": "https://raw.githubusercontent.com/openmaptiles/dark-matter-gl-style/gh-pages/sprite",
+    "glyphs": "https://tileserver.geomatico.es/fonts/{fontstack}/{range}.pbf",
 	"center": [
             4.264113,
             39.892787
@@ -59,12 +59,12 @@ En "sources" definiremos las fuentes de datos que queremos simbolizar. Tenemos d
 ### "vector"
 Podremos definir un fuente de tipo *"vector"* se definirá de las sigiuentes formas, utilizando la URL de las tiles directamente en el servidor o la URL del TileJSON
 
-```json hl_lines="13 14 15 16 17 18 19"
+```json hl_lines="13 14 15 16 17 18 19 20"
 {
     "version": 8,
-    "name": "Menorca Online",
-    "sprite": "mapbox://sprites/mapbox/streets-v8",
-    "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+    "name": "Menorca Base",
+    "sprite": "https://raw.githubusercontent.com/openmaptiles/dark-matter-gl-style/gh-pages/sprite",
+    "glyphs": "https://tileserver.geomatico.es/fonts/{fontstack}/{range}.pbf",
 	"center": [
             4.264113,
             39.892787
@@ -73,10 +73,11 @@ Podremos definir un fuente de tipo *"vector"* se definirá de las sigiuentes for
     "bearing": 0,
     "pitch": 30,
     "sources": {
-        "menorca-base": {
+        "buildingparts": {
             "type": "vector",
-            "url": "https://tileserver.fonts.cat/data/menorca_base.json",
-            "maxzoom": 14
+            "url": "https://tileserver.geomatico.es/data/building_latest.json",
+            "minzoom": 10,
+            "maxzoom": 15
         }
     }
 }
@@ -88,9 +89,9 @@ En el caso de un WMS deberemos incluir la URL del servicio que soporte EPSG:3857
 ```json hl_lines="13 14 15 16 17 18 19 20 21"
 {
     "version": 8,
-    "name": "Menorca Online",
-    "sprite": "mapbox://sprites/mapbox/streets-v8",
-    "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+    "name": "Menorca Base",
+    "sprite": "https://raw.githubusercontent.com/openmaptiles/dark-matter-gl-style/gh-pages/sprite",
+    "glyphs": "https://tileserver.geomatico.es/fonts/{fontstack}/{range}.pbf",
 	"center": [
             4.264113,
             39.892787
@@ -114,12 +115,12 @@ En el caso de un WMS deberemos incluir la URL del servicio que soporte EPSG:3857
 
 Cada *"source"* dispondrá de una o múltiples capas que podremos referenciar desde esta sección del JSON y que serán el punto donde definiremos mediante dos grupos de propiedades, "paint" y "layout" el estilo de nuestros datos. Existen también múltiples tipos de capas *"background"*, *"fill"*, *"line"*, *"symbol"*, *"raster"*, *"circle"*, *"fill-extrusion"*, *"heatmap"*, *"hillshade"* y cada una de ellas tendrá unas características diferentes
 
-```json hl_lines="24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47"
+```json hl_lines="21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44"
 {
     "version": 8,
-    "name": "Menorca Online",
-    "sprite": "mapbox://sprites/mapbox/streets-v8",
-    "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+    "name": "Menorca Base",
+    "sprite": "https://raw.githubusercontent.com/openmaptiles/dark-matter-gl-style/gh-pages/sprite",
+    "glyphs": "https://tileserver.geomatico.es/fonts/{fontstack}/{range}.pbf",
 	"center": [
             4.264113,
             39.892787
@@ -128,18 +129,15 @@ Cada *"source"* dispondrá de una o múltiples capas que podremos referenciar de
     "bearing": 0,
     "pitch": 30,
     "sources": {
-        "menorca-base": {
+        "buildingparts": {
             "type": "vector",
-            "url": "https://tileserver.fonts.cat/data/menorca_base.json",
-            "maxzoom": 14
-        },
-        "buildingpart": {
-            "type": "vector",
-            "url": "https://tileserver.fonts.cat/data/menorca_buildings.json"
+            "url": "https://tileserver.geomatico.es/data/building_latest.json",
+            "minzoom": 10,
+            "maxzoom": 15
         }
     },
     "layers": [
-            {
+        {
             "id": "background",
             "type": "background",
             "paint": {
@@ -149,8 +147,8 @@ Cada *"source"* dispondrá de una o múltiples capas que podremos referenciar de
         {
             "id": "building-3d",
             "type": "fill-extrusion",
-            "source": "buildingpart",
-            "source-layer": "buildingpart",
+            "source": "buildingparts",
+            "source-layer": "buildingparts",
             "paint": {
                 "fill-extrusion-color": "#d9c7a5",
                 "fill-extrusion-height": {
@@ -169,7 +167,7 @@ Cada *"source"* dispondrá de una o múltiples capas que podremos referenciar de
 
 Con las expresiones podemos definir formulas que modifican el valor de las propiedades usando los operadores que diponemos en Mapbox.
 
-```json hl_lines="32"
+```json hl_lines="29"
 {
     "version": 8,
     "name": "Menorca Online",
@@ -183,22 +181,19 @@ Con las expresiones podemos definir formulas que modifican el valor de las propi
     "bearing": 0,
     "pitch": 30,
     "sources": {
-        "menorca-base": {
+        "buildingparts": {
             "type": "vector",
-            "url": "https://tileserver.fonts.cat/data/menorca_base.json",
-            "maxzoom": 14
-        },
-        "buildingpart": {
-            "type": "vector",
-            "url": "https://tileserver.fonts.cat/data/menorca_buildings.json"
+            "url": "https://tileserver.geomatico.es/data/building_latest.json",
+            "minzoom": 10,
+            "maxzoom": 15
         }
     },
     "layers": [
         {
             "id": "building-3d",
             "type": "fill-extrusion",
-            "source": "buildingpart",
-            "source-layer": "buildingpart",
+            "source": "buildingparts",
+            "source-layer": "buildingparts",
             "paint": {
                 "fill-extrusion-color": "#d9c7a5",
                 "fill-extrusion-height": ["*", 3, ["get", "floors"]],
@@ -214,4 +209,4 @@ Con las expresiones podemos definir formulas que modifican el valor de las propi
 
 Cargar Menorca Online en el navegador e inspeccionar cómo está hecho:
 
-http://geomati.co/taller-vt-jiide/ejemplos/menorca-online.html
+https://labs.geomatico.es/taller-vt-jiide/ejemplos/menorca-online.html

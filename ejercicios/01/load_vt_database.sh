@@ -1,1 +1,1 @@
-psql -U postgres -W < vt_dump.sql
+sudo -u postgres psql < vt_dump.sql

@@ -3,7 +3,7 @@
 Un servicio de teselas *a la google* o de tipo "XYZ" consiste en una URL donde se sustituyen los valores de zoom, fila y
 columna siguiendo una plantilla, como en:
 
-http://tileserver.fonts.cat/data/buildingpart/{z}/{x}/{y}.pbf
+https://tileserver.geomatico.es/data/building_latest/{z}/{x}/{y}.pbf
 
 Se supone una proyección determinada, `EPSG:3857`, y un esquema de teselado determinado. Nada se sabe sobre el rango
 de zooms o el ámbito geográfico de los datos (BBXOX), su atribución, o su contenido. Por ello mapbox ideó un fichero
@@ -16,23 +16,28 @@ Este fichero de "metadatos" vendría a ser algo entre un GetCapabilities de mín
 
 ```json
 {
-  "tilejson": "2.0.0"
-  "name": "Catastro Building Parts",
-  "tiles":["http://tileserver.fonts.cat/data/buildingpart/{z}/{x}/{y}.pbf"],
-  "minzoom": 14,
-  "maxzoom": 16,
-  "bounds": [2.038039, 41.278439, 2.268328, 41.573783],
+  "tilejson": "2.0.0",
+  "name": "buildingparts",
+  "tiles":["https://tileserver.geomatico.es/data/building_latest/{z}/{x}/{y}.pbf"],
+  "minzoom": 10,
+  "maxzoom": 15,
+  "bounds": [-18.1604, 27.634874, 4.317627, 43.794889],
   "type": "overlay",
   "attribution": "Catastro",
   "vector_layers": [
     {
-      "id": "buildingpart",
-      "minzoom": 14,
-      "maxzoom": 16,
+      "id": "buildingparts",
+      "minzoom": 10,
+      "maxzoom": 15,
       "fields": {
+        "area": "Number",
+        "coc": "String",
+        "cu": "String",
         "floors": "Number",
-        "id": "String",
-        "parcel": "String"
+        "nbu": "Number",
+        "ndw": "Number",
+        "parcel": "String",
+        "year": "String"
       }
     }
   ]
@@ -54,12 +59,12 @@ en teselas raster. Si únicamente se quiere servir teselas vectoriales se puede 
 que no tiene ninguna dependencia nativa ya que está desarrollado en javascript.
 
 
-1. Abrir http://tileserver.fonts.cat en un navegador
+1. Abrir https://tileserver.geomatico.es en un navegador
 
 2. Explorar la sección "DATA":
 
     * Documento `TileJSON`
-    * Inspector
+    * Inspect
 
 3. Explorar la sección "STYLES":
 
@@ -68,6 +73,6 @@ que no tiene ninguna dependencia nativa ya que está desarrollado en javascript.
     * Servicio WMTS. Sólo para imagen.
     * Estructura de un documento GL Style:
         * Sprites  
-        * Glyphs (y el endpoint oculto: http://tileserver.fonts.cat/fonts.json)
+        * Glyphs (y el endpoint oculto: https://tileserver.geomatico.es/fonts.json)
         * Sources
         * Layers

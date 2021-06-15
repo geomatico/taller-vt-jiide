@@ -3,10 +3,8 @@ FROM (
   SELECT gid, n_barri,
     ST_AsMVTGeom(
       geom,
-      BBox(13, 4145, 3059),
-      4096,
-      0
+      ST_TileEnvelope(13, 4145, 3059)
     ) AS geom
   FROM barrios
-  WHERE geom && BBox(13, 4145, 3059)
+  WHERE geom && ST_TileEnvelope(13, 4145, 3059)
 ) AS q;

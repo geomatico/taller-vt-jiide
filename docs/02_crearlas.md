@@ -3,7 +3,7 @@
 Generar las teselas vectoriales al vuelo es lento, y se recomienda, en la medida de lo posible, tenerlas cacheadas.
 
 Almacenar una pirámide de teselas en una estructura de directorios, cuando se tiene una cantidad importante de datos, es
-también ineficiente, por lo que Mapbox creó el foramto mbtiles.
+también ineficiente, por lo que Mapbox creó el formato mbtiles.
 
 ## Especificación *`.mbtiles`*
 

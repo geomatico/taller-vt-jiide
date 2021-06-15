@@ -18,7 +18,7 @@ La web de referencia tiene 4 pestañas. Os estaréis moviendo entre las dos prim
 1. API: https://www.mapbox.com/mapbox-gl-js/api/
 2. Style Spec: https://www.mapbox.com/mapbox-gl-js/style-spec
 3. Examples: https://www.mapbox.com/mapbox-gl-js/example/simple-map/
-4. Plugis: https://www.mapbox.com/mapbox-gl-js/plugins
+4. Plugins: https://www.mapbox.com/mapbox-gl-js/plugins
 
 
 ## Otros enlaces

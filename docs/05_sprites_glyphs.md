@@ -25,16 +25,16 @@ Por ejemplo, si en el `style.json` se indica:
 ```json
 {
     ...
-    "sprite": "http://tileserver.fonts.cat/styles/dark-matter/sprite"
+    "sprite": "https://tileserver.geomatico.es/styles/dark-matter/sprite"
 }
 ```
 
 En realidad dicha URL no existe. Pero sí existen los siguientes recursos (añadiendo `.png`, `.json`, `@2x.png` y `@2x.json` respectivamente):
 
-* http://tileserver.fonts.cat/styles/dark-matter/sprite.png Sprite a resolución convencional
-* http://tileserver.fonts.cat/styles/dark-matter/sprite.json JSON que define cada icono dentro del sprite
-* http://tileserver.fonts.cat/styles/dark-matter/sprite@2x.png Sprite a resolución doble (para pantallas Retina)
-* http://tileserver.fonts.cat/styles/dark-matter/sprite@2x.json JSON que define cada icono dentro del sprite de resolución doble
+* http://tileserver.geomatico.es/styles/dark-matter/sprite.png Sprite a resolución convencional
+* http://tileserver.geomatico.es/styles/dark-matter/sprite.json JSON que define cada icono dentro del sprite
+* http://tileserver.geomatico.es/styles/dark-matter/sprite@2x.png Sprite a resolución doble (para pantallas Retina)
+* http://tileserver.geomatico.es/styles/dark-matter/sprite@2x.json JSON que define cada icono dentro del sprite de resolución doble
 
 Ejemplo de sprite:
 
@@ -68,13 +68,13 @@ Los sprites convencionales para la web difieren de los de Mapbox, ya que utiliza
 `json`, no un CSS. 
 
 Para generar los sprites y sus json a partir de una colección de imágenes en formato SVG, se recomienda el uso de la
-librería de Mapbox [spritezero-cli](https://github.com/mapbox/spritezero-cli).
+librería [spritezero-cli](https://github.com/geomatico/spritezero-cli).
 
 A partir de los iconos SVG contenidos en https://github.com/geomatico/taller-vt-jiide/tree/master/ejercicios/05
 
 1. Instalar spritezero (necesita node y npm):
 
-        npm install -g @mapbox/spritezero-cli
+        npm install -g @geomatico/spritezero-cli
 
 2. Ejecutar spritezero para generar los iconos a resolución estándar y a alta resolución:
 
@@ -93,7 +93,7 @@ utilizado es distinto), que se usarán para dibujar textos en el mapa. Por ejemp
 ```json
 {
     ...
-    "glyphs": "http://tileserver.fonts.cat/fonts/{fontstack}/{range}.pbf"
+    "glyphs": "https://tileserver.geomatico.es/fonts/{fontstack}/{range}.pbf"
 }
 ```
 
@@ -104,7 +104,7 @@ Esta plantilla de URL debe incluir dos tokens:
 
 Una petición real tendría la forma:
 
-* http://tileserver.fonts.cat/fonts/Open%20Sans%20Bold/0-255.pbf
+* https://tileserver.geomatico.es/fonts/Open%20Sans%20Bold/0-255.pbf
 
 Un glyph contiene una derivada de la tipografía binaria llamada [*signed distance field*](https://www.youtube.com/watch?v=d8cfgcJR9Tk)
 que permite escalarla sin el pixelado. Una composición de varios glyphs daría una imagen con este aspecto:
@@ -130,7 +130,7 @@ Si no queremos generar una tipografía determinada, basta con borrar el director
 Del mismo modo podemos añadir tipografías añadiendo nuevos directorios y copiando dentro las tipografías en
 formato TTF.
 
-El directorio `_output` no se borra entre ejecuciones, con lo que habremos conservado todas las fuentes anteriores,
-además de la recién generada "Comic Sans".
+El directorio `_output` no se borra entre ejecuciones, siempre se añaden nuevas
+tipografías sin borrar las anteriores.
 
 Finalmente, debemos publicar el contenido de `_output` en un servidor web, para que los visores de mapbox puedan acceder a él.
