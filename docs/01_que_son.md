@@ -1,7 +1,7 @@
 # Concepto de tesela vectorial
 
 !!! tip "Presentación"
-    Ver este capítulo en [formato presentación](../presentacion/)
+    Ver este capítulo en [formato presentación](presentacion/)
     
 
 ## Estándares de codificación de las teselas vectoriales

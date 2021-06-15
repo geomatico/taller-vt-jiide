@@ -47,7 +47,7 @@ cuando define el nuevo tipo MIME:
 }
 ```
 
-[**DEMO** WMS imagen](../ejemplos/wms-pnoa.html)
+[**DEMO** WMS imagen](ejemplos/wms-pnoa.html)
 
 ![Visor PNOA](img/visor-pnoa.png)
 
@@ -72,7 +72,7 @@ cuando define el nuevo tipo MIME:
   }
 ```
 
-[**DEMO** WMTS imagen](../ejemplos/wmts-pnoa.html)
+[**DEMO** WMTS imagen](ejemplos/wmts-pnoa.html)
 
 
 #### WFS:
@@ -97,7 +97,7 @@ cuando define el nuevo tipo MIME:
   }
 ```
 
-[**DEMO** WMTS imagen + WFS GeoJSON](../ejemplos/wfs-geojson.html)
+[**DEMO** WMTS imagen + WFS GeoJSON](ejemplos/wfs-geojson.html)
 
 
 ![Visor Metro](img/visor-metro.png)
@@ -126,4 +126,4 @@ cuando define el nuevo tipo MIME:
   }
 ```
 
-[**DEMO** WMTS imagen + Vector Tile TMS](../ejemplos/tms-vector.html)
+[**DEMO** WMTS imagen + Vector Tile TMS](ejemplos/tms-vector.html)

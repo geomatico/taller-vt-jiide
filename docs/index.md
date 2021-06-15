@@ -38,9 +38,9 @@ Este manual está publicado aquí:
 
 ## Autores
 
-* Oscar Fonts *@oscarfonts*, desarrollador freelance en [geomati.co](http://geomati.co)
+* Oscar Fonts *@oscarfonts*, socio trabajador en [geomatico.es](https://geomatico.es)
 * Wladimir Szczerban (alias Bolo) *@bolosig*, [geostarter](http://betaportal.icgc.cat) (ICGC)
-* Micho García *@michogar*, desarrollador freelance en [geomati.co](http://geomati.co)
+* Micho García *@michogar*, socio trabajador en [geomatico.es](https://geomatico.es)
 
 !!! note "Condiciones de reutilización de estos apuntes"
 
